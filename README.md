@@ -1,3 +1,3 @@
 # ATFoundation
 
-A description of this package.
+ATFoundation provides a base layer of functionality for an iOS app.
