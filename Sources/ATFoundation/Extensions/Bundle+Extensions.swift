@@ -10,6 +10,11 @@ import Foundation
 
 extension Bundle {
 
+    /// CFBundleName in Info.plist.
+    public var name: String {
+        string(forInfoDictionaryKey: "CFBundleName")
+    }
+
     /// CFBundleShortVersionString in Info.plist.
     public var shortVersion: String {
         string(forInfoDictionaryKey: "CFBundleShortVersionString")
