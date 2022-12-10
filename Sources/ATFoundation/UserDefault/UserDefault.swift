@@ -19,8 +19,9 @@ public class UserDefault<Value> : ObservableObject where Value : Equatable {
         }
     }
 
-    private let key: String
-    private let store: UserDefaults
+    public let key: String
+    public let store: UserDefaults
+
     private let registerNewValue: (Value) -> Void
 
     public init(
