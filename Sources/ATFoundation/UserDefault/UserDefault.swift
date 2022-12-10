@@ -20,6 +20,7 @@ public class UserDefault<Value> : ObservableObject where Value : Equatable {
     }
 
     public let key: String
+    public let defaultValue: Value
     public let store: UserDefaults
 
     private let registerNewValue: (Value) -> Void
@@ -31,6 +32,7 @@ public class UserDefault<Value> : ObservableObject where Value : Equatable {
     ) where Value: UserDefaultsElegible {
 
         self.key = key
+        self.defaultValue = defaultValue
         self.store = store
 
         if let currentValue = store.value(forKey: key) as? Value {
@@ -52,6 +54,7 @@ public class UserDefault<Value> : ObservableObject where Value : Equatable {
     ) where Value : RawRepresentable, Value.RawValue : UserDefaultsElegible {
 
         self.key = key
+        self.defaultValue = defaultValue
         self.store = store
 
         if let rawValue = store.value(forKey: key) as? Value.RawValue,
@@ -66,6 +69,11 @@ public class UserDefault<Value> : ObservableObject where Value : Equatable {
         registerNewValue = { v in
             store.set(v.rawValue, forKey: key)
         }
+    }
+
+    /// Resets the value of the default to its default value.
+    public func reset() {
+        value = defaultValue
     }
 
 }
