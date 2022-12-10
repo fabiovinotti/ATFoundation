@@ -35,12 +35,8 @@ public class UserDefault<Value> : ObservableObject where Value : Equatable {
         self.defaultValue = defaultValue
         self.store = store
 
-        if let currentValue = store.value(forKey: key) as? Value {
-            value = currentValue
-        } else {
-            value = defaultValue
-            store.register(defaults: [key: defaultValue])
-        }
+        let currentValue = store.value(forKey: key) as? Value
+        value = currentValue ?? defaultValue
 
         registerNewValue = { v in
             store.set(v, forKey: key)
@@ -63,7 +59,6 @@ public class UserDefault<Value> : ObservableObject where Value : Equatable {
             value = v
         } else {
             value = defaultValue
-            store.register(defaults: [key: defaultValue.rawValue])
         }
 
         registerNewValue = { v in
